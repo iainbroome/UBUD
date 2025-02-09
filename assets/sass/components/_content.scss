@@ -21,6 +21,11 @@
     margin-top: var(--space-24);
   }
 
+  // Remove space between full-width cards
+  > .kg-width-full + .kg-width-full:not(.kg-width-full.kg-card-hascaption + .kg-width-full) {
+    margin-top: 0;
+  }
+
   a:not([class]) {
     text-decoration: underline;
     text-underline-offset: var(--space-4);
@@ -31,7 +36,7 @@
   }
 
   table {
-    font-size: var(--font-size-small);
+    font-size: var(--ub-font-size-small);
     line-height: var(--line-height-small);
   }
 

@@ -2,7 +2,28 @@
   Components > Card Header / Editor
 \*------------------------------------*/
 
-.c-content {
+.kg-header-card.kg-width-full {
+  width: 100vw;
+}
+
+.kg-content-wide {
+  .kg-header-card-content {
+    width: 100%;
+    margin: auto;
+  }
+
+  &:not(.kg-layout-split) .kg-header-card-content {
+    max-width: calc(var(--grid-width) - var(--space-80));
+  }
+
+  &.kg-layout-split .kg-header-card-content {
+    @include mq($from: desktop) {
+      max-width: calc(var(--grid-width) - var(--space-80));
+    }
+  }
+}
+
+.c-content_ {
   .kg-header-card {
     width: 100vw;
     display: flex;

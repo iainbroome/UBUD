@@ -71,6 +71,10 @@
     }
   }
 
+  &__authors-images {
+    display: flex;
+  }
+
   &__date {
     color: var(--color-text-secondary);
   }
