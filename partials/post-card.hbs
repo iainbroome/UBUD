@@ -1,6 +1,6 @@
 <div class='c-post-card js-post-card {{ post_class }} {{#unless feature_image}} c-post-card--no-image {{/unless}} {{#if cardWidth}} c-post-card--wide {{/if}}'>
   <div class='c-post-card__meta'>
-    <time class='c-post-card__date u-type-uppercase' datetime='{{ date format='YYYY-MM-DD' }}'>{{ date format='D MMM YYYY' }}</time>
+    <time class='c-post-card__date u-type-lowercase' datetime='{{ date format='YYYY-MM-DD' }}'>{{ date format='D MMMM YYYY' }}</time>
 
     {{#if @site.members_enabled}}
       <div class='is-membership
