@@ -6,7 +6,7 @@
       <div class='c-home {{#unless feature_image}}c-home--content-only{{/unless}}'>
         {{#if feature_image}}
           <div class='c-home__media'>
-            <img class='c-home__image lazyload' data-src='{{ img_url feature_image size='home-image-default' }}' alt='{{ @site.title }}'>
+            <img class='c-home__image lazyload' src='{{ img_url feature_image size='home-image-default' format='webp' }}' alt='{{ @site.title }}'>
           </div>
         {{/if}}
 
