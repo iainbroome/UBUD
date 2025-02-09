@@ -6,7 +6,7 @@
       <div class='c-home-right {{#unless feature_image}}c-home-right--content-only{{/unless}}'>
         {{#if feature_image}}
           <div class='c-home-right__media'>
-            <img class='c-home-right__image lazyload' src='{{ img_url feature_image size='home-image-default' format='webp' }}' alt='{{ @site.title }}'>
+            <img class='c-home-right__image lazyload' data-src='{{ img_url feature_image size='home-image-default' }}' alt='{{ @site.title }}'>
           </div>
         {{/if}}
 
@@ -14,7 +14,6 @@
           <section class='c-content'>
             {{ content }}
 
-            {{> home/subscribe-form }}
           </section>
         </div>
       </div>
