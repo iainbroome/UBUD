@@ -12,27 +12,14 @@
       rename       = require('gulp-rename'),
       uglify       = require('gulp-uglify'),
       jshint       = require('gulp-jshint'),
-      plumber      = require('gulp-plumber'),
-      colors       = require('ansi-colors'),
-      beeper       = require('beeper'),
       replace      = require('gulp-replace'),
       size         = require('gulp-size'),
       zip          = require('gulp-zip'),
       fs           = require('fs');
 
-  // Set the compiler to use Dart Sass instead of Node Sass
-  sass.compiler = require('dart-sass');
-
-  var onError = function( err ) {
-    console.log('An error occurred:', colors.red(err.message));
-    beeper();
-    this.emit('end');
-  };
-
   // SASS
   gulp.task('sass', function (done) {
     return gulp.src('./assets/sass/*.scss')
-    .pipe(plumber({ errorHandler: onError }))
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(rename({suffix: '-min'}))
@@ -67,6 +54,7 @@
       './bower_components/jquery/dist/jquery.js',
       './bower_components/bootstrap-transition/scripts/transition.js',
       './bower_components/zoom.js/dist/zoom.js',
+      './assets/js/semicolon.js',
       './node_modules/tocbot/dist/tocbot.min.js',
       './node_modules/lazysizes/lazysizes.min.js',
       './node_modules/evil-icons/assets/evil-icons.min.js',

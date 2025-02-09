@@ -2,7 +2,7 @@
   "name": "UBUD",
   "description": "Premium Ghost CMS Theme",
   "demo": "https://ubud.aspirethemes.com/",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "engines": {
     "ghost": ">=5.0.0"
   },
@@ -13,38 +13,35 @@
     "postinstall": "bower install"
   },
   "dependencies": {
-    "@primer/css": "^17.11.0",
-    "clipboard": "^2.0.8",
+    "@primer/css": "^21.0.8",
+    "clipboard": "^2.0.11",
     "concat": "^3.0.0",
     "evil-icons": "^1.10.1",
     "fs": "0.0.2",
-    "gulp-concat": "^2.6.0",
+    "gulp-concat": "^2.6.1",
     "lazysizes": "^5.3.2",
     "normalize.css": "^8.0.1",
-    "prismjs": "^1.25.0",
-    "sass-mq": "^5.0.1",
-    "tocbot": "^4.12.0"
+    "prismjs": "^1.29.0",
+    "sass-mq": "^6.0.0",
+    "tocbot": "^4.21.1"
   },
   "devDependencies": {
-    "ansi-colors": "^1.1.0",
-    "beeper": "^1.1.1",
-    "dart-sass": "^1.25.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-jshint": "^2.1.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
-    "gulp-replace": "^1.1.3",
-    "gulp-rtlcss": "^1.4.2",
-    "gulp-sass": "^5.0.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-rtlcss": "^2.0.0",
+    "gulp-sass": "^5.1.0",
     "gulp-size": "^4.0.1",
     "gulp-uglify": "^3.0.2",
-    "gulp-zip": "^4.2.0",
-    "jshint": "^2.13.1",
+    "gulp-zip": "^5.1.0",
+    "jshint": "^2.13.6",
     "jshint-stylish": "^2.2.1",
     "run-sequence": "^2.2.1",
-    "sass": "^1.35.1"
+    "sass": "^1.66.1"
   },
   "author": {
     "name": "Aspire Themes",
@@ -69,6 +66,14 @@
         "type": "text",
         "default": ""
       },
+      "mastodon_page": {
+        "type": "text",
+        "default": ""
+      },
+      "discord_page": {
+        "type": "text",
+        "default": ""
+      },
       "show_search": {
         "type": "boolean",
         "default": true
@@ -84,7 +89,8 @@
           "Image Circle xLarge",
           "Image Center",
           "Image Wide",
-          "Image Full"],
+          "Image Full"
+        ],
         "default": "Image Left",
         "group": "homepage"
       },
@@ -114,7 +120,6 @@
         "button",
         "blockquote",
         "bookmark",
-        "header",
         "image",
         "gallery"
       ]
