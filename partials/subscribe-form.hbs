@@ -6,7 +6,7 @@
   1. partials/home/subscribe-form.hbs
 --}}
 
-{{!--<form data-members-form='signup' class='c-subscribe-form is-membership {{ formClass }}'>
+<form data-members-form='signup' class='c-subscribe-form is-membership {{ formClass }}'>
   <div class='c-form-group'>
     <label for='{{ emailLabel }}' class='u-hidden-visually'>{{t 'Your email address' }}</label>
     <input type='email' name='email' class='c-form-group__input' id='{{ emailLabel }}' placeholder='{{t 'Your email address' }}' required data-members-email>
@@ -16,11 +16,4 @@
   <div class='c-alert c-alert--success'>{{t 'Please check your inbox and click the link to confirm your subscription.' }}</div>
   <div class='c-alert c-alert--invalid'>{{t 'Please enter a valid email address!' }}</div>
   <div class='c-alert c-alert--error'>{{t 'An error occurred, please try again later.' }}</div>
-</form>--}}
-
-<div class='o-grid'>
-  <div class='o-grid__col o-grid__col--center o-grid__col--2-4-m o-grid__col--1-3-l'>
-      <a href='{{ @site.url }}/#/portal/signup' class='c-btn c-btn--full'>{{t 'Subscribe now' }}</a>
-    </div>
-  </div>
-</div>
+</form>
