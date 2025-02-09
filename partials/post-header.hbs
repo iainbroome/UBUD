@@ -20,8 +20,8 @@
       <div class='c-post-header__author_info'>
         <div class='c-post-header__author_name'>{{authors separator=' / '}}</div>
         <div>
-          <time class='c-post-header__date u-type-uppercase' datetime='{{ date format='YYYY-MM-DD' }}'>{{ date format='D MMM YYYY' }}</time>
-          {{#if reading_time}} — <span class='c-post-header__reading-time u-type-uppercase'>{{ reading_time minute=(t '1 min read') minutes=(t '% min read') }}</span>{{/if}}
+          <time class='c-post-header__date u-type-lowercase' datetime='{{ date format='YYYY-MM-DD' }}'>{{ date format='D MMMM YYYY' }}</time>
+          {{#if reading_time}} — <span class='c-post-header__reading-time u-type-lowercase'>{{ reading_time minute=(t '1 min read') minutes=(t '% min read') }}</span>{{/if}}
         </div>
       </div>
     </div>
