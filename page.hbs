@@ -7,12 +7,16 @@
 <div class='o-grid'>
   <div class='o-grid__col o-grid__col--center o-grid__col--9-10-m o-grid__col--2-3-l'>
     <article class='c-{{ post_class }}'>
-      {{> post-header }}
+      {{#match @page.show_title_and_feature_image}}
+        {{> post-header }}
+      {{/match}}
 
       {{#if access}}
-        {{#if @custom.show_table_of_contents_on_all_pages}}
-          {{> table-of-contents }}
-        {{/if}}
+        {{#match @page.show_title_and_feature_image}}
+          {{#if @custom.show_table_of_contents_on_all_pages}}
+            {{> table-of-contents }}
+          {{/if}}
+        {{/match}}
 
         {{#has tag='#table-of-content'}}
           {{> table-of-contents }}
