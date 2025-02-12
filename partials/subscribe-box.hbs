@@ -26,13 +26,14 @@
           <div class='{{#is 'home'}} o-grid__col o-grid__col--center o-grid__col--9-10-m o-grid__col--2-3-l {{/is}}'>
             <section class='c-subscribe'>
               <div class='c-subscribe__content'>
-                <h2 class='c-subscribe__heading u-type-500 u-mb-8'>{{t 'Join 1700+ readers' siteTitle=@site.title}}</h2>
-                <p class='u-mb-16'>{{t 'I send Draft Mode, a monthly newsletter about writing, creativity, publishing and making things on the internet.' }}</p>
+                <h2 class='c-subscribe__heading u-type-500 u-mb-8'>{{t 'Join 1700+ subscribers' siteTitle=@site.title}}</h2>
+                <p class='u-mb-16'>{{t 'I send Draft Mode, a monthly newsletter about writing, creativity, publishing and making things on the internet. Pop your email address in the box to join us.' }}</p>
                 {{>
                   subscribe-form
                   nameLabel='subscribe-box-name'
                   emailLabel='subscribe-box-email'
                 }}
+                                <p class='u-mb-16 unsub'>{{t 'No spam. Unsubscribe any time.' }}</p>
               </div>
               <div class='c-subscribe__icon'>
                 {{> subscribe-box-icon }}
