@@ -6,6 +6,7 @@
   <div class='o-grid__col o-grid__col--center o-grid__col--9-10-m o-grid__col--2-3-l'>
     <div class='c-archive'>
       <h1 class='c-archive__title'>{{t 'Blog' }}</h1>
+                <p class='c-archive__description'>This is the full list of all published posts, which includes articles, podcast episodes and online versions of <a href="/newsletters">email newsletters.</a></p>
     </div>
   </div>
 </div>
@@ -18,4 +19,10 @@
 
 <div class='o-grid'>
   {{ pagination }}
+</div>
+
+<div class='o-grid'>
+  <div class='o-grid__col o-grid__col--center o-grid__col--9-10-m o-grid__col--2-3-l'>
+    {{> subscribe-box }}
+  </div>
 </div>
