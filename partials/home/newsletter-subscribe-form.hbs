@@ -74,15 +74,15 @@
             <span class="btn-loading">Subscribing...</span>
           </button>
 
-          <div data-members-success class="success-message" style="display: none;">
+          <div data-members-success class="success-message">
             Thanks for subscribing! Please check your email to confirm.
           </div>
 
-          <div data-members-error class="error-message" style="display: none;">
+          <div data-members-error class="error-message">
             <!-- Error message will be populated by Ghost -->
           </div>
 
-          <div id="custom-message" class="custom-message" style="display: none;"></div>
+          <div id="custom-message" class="custom-message"></div>
         </form>
       </div>
 
@@ -237,6 +237,15 @@
           background-color: #fef2f2;
           color: #b91c1c;
           border: 1px solid #fecaca;
+        }
+
+        /* Show/hide states */
+        [data-members-success] .success-message {
+          display: block !important;
+        }
+
+        [data-members-error] .error-message {
+          display: block !important;
         }
       </style>
 
