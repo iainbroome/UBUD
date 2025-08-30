@@ -1,3 +1,4 @@
+{{!-- Replace your existing subscribe-form partial with this custom version --}}
 {{#unless @member}}
   {{#if @site.members_enabled}}
     {{#unless @site.members_invite_only}}
@@ -73,13 +74,15 @@
             <span class="btn-loading">Subscribing...</span>
           </button>
 
-          <div data-members-success class="success-message">
+          <div data-members-success class="success-message" style="display: none;">
             Thanks for subscribing! Please check your email to confirm.
           </div>
 
-          <div data-members-error class="error-message">
+          <div data-members-error class="error-message" style="display: none;">
             <!-- Error message will be populated by Ghost -->
           </div>
+
+          <div id="custom-message" class="custom-message" style="display: none;"></div>
         </form>
       </div>
 
@@ -213,34 +216,27 @@
           display: inline;
         }
 
-        .success-message {
-          display: none;
+        .success-message,
+        .error-message,
+        .custom-message {
           margin-top: 16px;
           padding: 16px;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+
+        .success-message,
+        .custom-message.success {
           background-color: #f0f9ff;
           color: #0c4a6e;
           border: 1px solid #bae6fd;
-          border-radius: 4px;
-          font-size: 14px;
         }
 
-        .error-message {
-          display: none;
-          margin-top: 16px;
-          padding: 16px;
+        .error-message,
+        .custom-message.error {
           background-color: #fef2f2;
           color: #b91c1c;
           border: 1px solid #fecaca;
-          border-radius: 4px;
-          font-size: 14px;
-        }
-
-        [data-members-success] .success-message {
-          display: block;
-        }
-
-        [data-members-error] .error-message {
-          display: block;
         }
       </style>
 
@@ -262,9 +258,12 @@
             
             if (selectedNewsletters.length === 0) {
               e.preventDefault();
-              alert('Please select at least one newsletter to subscribe to.');
+              showCustomMessage('Please select at least one newsletter to subscribe to.', 'error');
               return;
             }
+
+            // Clear any previous custom messages
+            hideCustomMessage();
 
             // Add selected newsletter IDs to form data
             const newsletterIdInputs = document.querySelectorAll('input[name="newsletter-ids"]');
@@ -280,6 +279,41 @@
                 form.appendChild(hiddenInput);
               }
             });
+          });
+
+          // Custom message handling
+          function showCustomMessage(message, type) {
+            const customMessage = document.getElementById('custom-message');
+            customMessage.textContent = message;
+            customMessage.className = `custom-message ${type}`;
+            customMessage.style.display = 'block';
+          }
+
+          function hideCustomMessage() {
+            const customMessage = document.getElementById('custom-message');
+            customMessage.style.display = 'none';
+          }
+
+          // Listen for Ghost's native success/error events
+          form.addEventListener('success', function() {
+            const selectedNewsletters = Array.from(document.querySelectorAll('input[name="newsletters"]:checked'));
+            const newsletterNames = selectedNewsletters.map(checkbox => 
+              checkbox.value === 'beating' ? 'Beating' : 'Draft Mode'
+            );
+            
+            if (newsletterNames.length > 0) {
+              const message = newsletterNames.length === 1 
+                ? `Thanks for subscribing to ${newsletterNames[0]}! Please check your email to confirm.`
+                : `Thanks for subscribing to ${newsletterNames.join(' and ')}! Please check your email to confirm.`;
+              
+              showCustomMessage(message, 'success');
+              
+              // Hide Ghost's default success message
+              const defaultSuccess = form.querySelector('[data-members-success]');
+              if (defaultSuccess) {
+                defaultSuccess.style.display = 'none';
+              }
+            }
           });
 
           // Make newsletter options clickable
