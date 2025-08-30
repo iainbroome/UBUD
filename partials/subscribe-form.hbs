@@ -6,7 +6,7 @@
   1. partials/home/subscribe-form.hbs
 --}}
 
-<form data-members-form='signup' class='c-subscribe-form is-membership {{ formClass }}'>
+<form data-members-form='signup' class='c-subscribe-form is-membership {{ formClass }}' id='custom-newsletter-form'>
   <div class='c-form-group'>
     <label for='{{ emailLabel }}' class='u-hidden-visually'>{{t 'Your email address' }}</label>
     <input type='email' name='email' class='c-form-group__input' id='{{ emailLabel }}' placeholder='{{t 'Your email address' }}' required data-members-email>
@@ -17,14 +17,121 @@
     <p class='u-mb-8'>{{t 'Choose your newsletters:' }}</p>
     <div class='c-checkbox-group'>
       <label class='c-checkbox-label'>
-        <input type='checkbox' data-members-newsletter='6270f8d75e2d3a0031603372' class='c-checkbox' checked>
+        <input type='checkbox' name='newsletters' value='6270f8d75e2d3a0031603372' class='c-checkbox' checked>
         <span class='c-checkbox-text'>Draft Mode</span>
       </label>
       <label class='c-checkbox-label'>
-        <input type='checkbox' data-members-newsletter='67b8dc0a0db361000135048f' class='c-checkbox' checked>
-        <span class='c-checkbox-text'>Beating</span>
+        <input type='checkbox' name='newsletters' value='67b8dc0a0db361000135048f' class='c-checkbox' checked>
+        <span class='c-checkbox-text'>beating</span>
       </label>
     </div>
+  </div>
+
+  <p class='u-mb-16 unsub'>{{t 'No spam. Unsubscribe any time.' }}</p>
+
+  <div class='c-alert c-alert--success' style='display: none;'>{{t 'Please check your inbox and click the link to confirm your subscription.' }}</div>
+  <div class='c-alert c-alert--invalid' style='display: none;'>{{t 'Please enter a valid email address!' }}</div>
+  <div class='c-alert c-alert--error' style='display: none;'>{{t 'An error occurred, please try again later.' }}</div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('custom-newsletter-form');
+  const emailInput = form.querySelector('input[type="email"]');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const successAlert = form.querySelector('.c-alert--success');
+  const invalidAlert = form.querySelector('.c-alert--invalid');
+  const errorAlert = form.querySelector('.c-alert--error');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Hide all alerts
+    successAlert.style.display = 'none';
+    invalidAlert.style.display = 'none';
+    errorAlert.style.display = 'none';
+    
+    const email = emailInput.value.trim();
+    
+    // Basic email validation
+    if (!email || !isValidEmail(email)) {
+      invalidAlert.style.display = 'block';
+      return;
+    }
+    
+    // Get selected newsletters
+    const selectedNewsletters = Array.from(form.querySelectorAll('input[name="newsletters"]:checked'))
+      .map(checkbox => checkbox.value);
+    
+    if (selectedNewsletters.length === 0) {
+      errorAlert.textContent = 'Please select at least one newsletter.';
+      errorAlert.style.display = 'block';
+      return;
+    }
+    
+    // Disable submit button during processing
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Subscribing...';
+    
+    try {
+      // Subscribe to each selected newsletter
+      const subscriptionPromises = selectedNewsletters.map(newsletter => 
+        subscribeToNewsletter(email, newsletter)
+      );
+      
+      await Promise.all(subscriptionPromises);
+      
+      // Show success message
+      successAlert.style.display = 'block';
+      form.reset();
+      
+      // Re-check the checkboxes (since reset unchecks them)
+      form.querySelectorAll('input[name="newsletters"]').forEach(cb => cb.checked = true);
+      
+    } catch (error) {
+      console.error('Subscription error:', error);
+      errorAlert.style.display = 'block';
+    } finally {
+      // Re-enable submit button
+      submitBtn.disabled = false;
+      submitBtn.textContent = '{{t "Subscribe" }}';
+    }
+  });
+  
+  async function subscribeToNewsletter(email, newsletter) {
+    const response = await fetch('/members/api/send-magic-link/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        newsletters: [newsletter],
+        autoRedirect: false
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to subscribe to ${newsletter}`);
+    }
+    
+    return response.json();
+  }
+  
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+});
+</script><form data-members-form='signup' class='c-subscribe-form is-membership {{ formClass }}'>
+  <div class='c-form-group'>
+    <label for='{{ emailLabel }}' class='u-hidden-visually'>{{t 'Your email address' }}</label>
+    <input type='email' name='email' class='c-form-group__input' id='{{ emailLabel }}' placeholder='{{t 'Your email address' }}' required data-members-email>
+    <button type='submit' value='{{t 'Subscribe' }}' class='c-btn c-form-group__btn'>{{t 'Subscribe' }}</button>
+  </div>
+
+  <div class='c-newsletter-info'>
+    <p class='u-mb-8'>{{t 'Subscribe to Draft Mode and beating newsletters' }}</p>
   </div>
 
   <p class='u-mb-16 unsub'>{{t 'No spam. Unsubscribe any time.' }}</p>
