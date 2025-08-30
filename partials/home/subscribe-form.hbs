@@ -23,7 +23,11 @@
 {{#unless @member}}
   {{#if @site.members_enabled}}
     {{#unless @site.members_invite_only}}
-      {{> newsletter-subscribe-form}}
+      {{>
+        newsletter-subscribe-form
+        nameLabel='home-content-subscribe-form-name'
+        emailLabel='home-content-subscribe-form-email'
+      }}
     {{/unless}}
   {{/if}}
 {{/unless}}
