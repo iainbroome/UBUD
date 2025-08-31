@@ -1,6 +1,6 @@
 {{!-- Homepage recent posts --}}
 
-{{#get 'posts' filter='tag:-beating,-draft-mode' limit=@custom.number_of_recent_posts include='tags'}}
+{{#get 'posts' filter='tag:-beating, -draft mode' limit=@custom.number_of_recent_posts include='tags'}}
   {{#if posts}}
     <div class='o-grid'>
       <div class='o-grid__col o-grid__col--center o-grid__col--9-10-m o-grid__col--2-3-l'>
