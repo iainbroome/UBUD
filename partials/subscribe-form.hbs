@@ -12,6 +12,21 @@
     <input type='email' name='email' class='c-form-group__input' id='{{ emailLabel }}' placeholder='{{t 'Your email address' }}' required data-members-email>
     <button type='submit' value='{{t 'Subscribe' }}' class='c-btn c-form-group__btn'>{{t 'Subscribe' }}</button>
   </div>
+
+  <div class='c-newsletter-options'>
+    <p class='u-mb-8'>{{t 'Choose your newsletters:' }}</p>
+    <div class='c-checkbox-group'>
+      <label class='c-checkbox-label'>
+        <input type='checkbox' data-members-newsletter='draft-mode' class='c-checkbox' checked>
+        <span class='c-checkbox-text'>Draft Mode</span>
+      </label>
+      <label class='c-checkbox-label'>
+        <input type='checkbox' data-members-newsletter='beating' class='c-checkbox' checked>
+        <span class='c-checkbox-text'>beating</span>
+      </label>
+    </div>
+  </div>
+
   <p class='u-mb-16 unsub'>{{t 'No spam. Unsubscribe any time.' }}</p>
 
   <div class='c-alert c-alert--success'>{{t 'Please check your inbox and click the link to confirm your subscription.' }}</div>
